@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+   </style>
+</head>
+<body>
+   <div id="buttons">
+      <button onclick="beforeDog()">before</button>
+      <button onclick="nextDog()">next</button>
+   </div>
+   <img id="photo" src="">
+   
+   <script>
+      const dogs = [
+         "https://images.dog.ceo/breeds/maltese/n02085936_7272.jpg",
+         "https://images.dog.ceo/breeds/terrier-border/n02093754_2847.jpg",
+         "https://images.dog.ceo/breeds/airedale/n02096051_5241.jpg",
+         "https://images.dog.ceo/breeds/terrier-tibetan/n02097474_2012.jpg"
+      ];
+
+      let pg = 0;
+      let photo = document.querySelector("#photo");
+      photo.src = dogs[0];
+
+      function nextDog(){
+         console.log("next ini: "+pg);
+         pg++;
+         if(pg == (dogs.length)){
+            pg = 0;
+         }
+         photo.src = dogs[pg];
+         console.log("next fim: "+pg);
+      }
+
+      function beforeDog(){
+         console.log("before ini: "+pg);
+         pg--;
+         if(pg < 0){
+            pg = dogs.length - 1;
+         }
+         photo.src = dogs[pg];
+         console.log("before fim: "+pg);
+      }
+   </script>
+</body>
+</html>
