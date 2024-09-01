@@ -35,7 +35,7 @@
          "https://images.dog.ceo/breeds/pekinese/n02086079_6620.jpg",
          "https://images.dog.ceo/breeds/spaniel-cocker/n02102318_11573.jpg",
          "https://images.dog.ceo/breeds/airedale/n02096051_5241.jpg",
-         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg"
+         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg","https://images.dog.ceo/breeds/sharpei/noel.jpg"
       ];
 
       let images = document.querySelector("#images");
@@ -49,41 +49,50 @@
 
       let pg = 0, aux = 0;
       let photo = document.getElementsByClassName("photo");
-      photo.src = dogs[0];
 
       let buttonsContainer = document.querySelector("#buttons");
 
       function nextDog(){
-         aux = 0;
-         console.log("next ini: "+pg);
+         console.log("next");
+         //console.log("i:"+i+" aux:"+aux+" pg:"+pg);
+         for(let i = 0; i < dogs.length; i++){
+            //let especificPhoto =  photo[i];
+            pg++;
+            if(pg == dogs.length){
+               pg = 0;
+            }
+            photo[i].src = dogs[pg];
+            console.log("aux: "+pg+" i:"+i);
+         }
          pg++;
-
-         if(pg == (dogs.length)){
+         if(pg == dogs.length){
             pg = 0;
          }
-
-         for(let i = 0; i < dogs.length; i++){
-            let especificPhoto = photo[i];
-            aux = pg+i;
-
-            if(aux >= dogs.length){
-               aux = i-pg;
-            }
-
-            console.log("i:"+i+" aux:"+aux+" pg:"+pg);
-            especificPhoto.src = dogs[aux];
-         }
-         console.log("next fim: "+pg);
       }
 
-      function beforeDog(){
-         console.log("before ini: "+pg);
+      function beforedDog(){
          pg--;
          if(pg < 0){
             pg = dogs.length - 1;
          }
          photo.src = dogs[pg];
-         console.log("before fim: "+pg);
+      }
+
+      function beforeDog(){
+         console.log("before");
+         for(let i = 0; i < dogs.length; i++){
+            //let especificPhoto =  photo[i];
+            pg--;
+            if(pg < 0){
+            pg = dogs.length - 1;;
+            }
+            photo[i].src = dogs[pg];
+            console.log("aux: "+pg+" i:"+i);
+         }
+         pg--;
+         if(pg < 0){
+            pg = dogs.length - 1;;
+         }
       }
 
    </script>
