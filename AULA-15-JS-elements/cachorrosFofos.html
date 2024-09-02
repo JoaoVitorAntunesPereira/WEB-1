@@ -3,18 +3,19 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Cachórros fófos</title>
    <style>
-      #buttons{
+      #buttons {
          display: flex;
          justify-content: space-between;
          width: 200px;
       }
 
-      #images{
+      #images {
          display: flex;
       }
-      .photo{
+
+      .photo {
          width: 200px;
       }
    </style>
@@ -27,7 +28,6 @@
    </div>
 
    <div id="images">
-
    </div>
 
    <script>
@@ -35,66 +35,39 @@
          "https://images.dog.ceo/breeds/pekinese/n02086079_6620.jpg",
          "https://images.dog.ceo/breeds/spaniel-cocker/n02102318_11573.jpg",
          "https://images.dog.ceo/breeds/airedale/n02096051_5241.jpg",
-         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg","https://images.dog.ceo/breeds/sharpei/noel.jpg"
+         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg",
+         "https://images.dog.ceo/breeds/sharpei/noel.jpg"
       ];
 
-      let images = document.querySelector("#images");
+      const imagesContainer = document.querySelector("#images");
 
-      for(let i = 0; i < dogs.length; i++){
-         let imagesDogs = document.createElement('img');
-         imagesDogs.classList.add('photo');
-         imagesDogs.src = dogs[i];
-         images.appendChild(imagesDogs);
-      }
+      // Criar elementos de imagem e adicionar ao container
+      dogs.forEach((dogSrc) => {
+         let imgElement = document.createElement('img');
+         imgElement.classList.add('photo');
+         imgElement.src = dogSrc;
+         imagesContainer.appendChild(imgElement);
+      });
 
-      let pg = 0, aux = 0;
-      let photo = document.getElementsByClassName("photo");
+      let pg = 0;
+      const photos = document.getElementsByClassName("photo");
 
-      let buttonsContainer = document.querySelector("#buttons");
-
-      function nextDog(){
-         console.log("next");
-         //console.log("i:"+i+" aux:"+aux+" pg:"+pg);
-         for(let i = 0; i < dogs.length; i++){
-            //let especificPhoto =  photo[i];
-            pg++;
-            if(pg == dogs.length){
-               pg = 0;
-            }
-            photo[i].src = dogs[pg];
-            console.log("aux: "+pg+" i:"+i);
-         }
-         pg++;
-         if(pg == dogs.length){
-            pg = 0;
+      function updateImages() {
+         for (let i = 0; i < dogs.length; i++) {
+            let index = (pg + i) % dogs.length;
+            photos[i].src = dogs[index];
          }
       }
 
-      function beforedDog(){
-         pg--;
-         if(pg < 0){
-            pg = dogs.length - 1;
-         }
-         photo.src = dogs[pg];
+      function nextDog() {
+         pg = (pg + 1) % dogs.length;
+         updateImages();
       }
 
-      function beforeDog(){
-         console.log("before");
-         for(let i = 0; i < dogs.length; i++){
-            //let especificPhoto =  photo[i];
-            pg--;
-            if(pg < 0){
-            pg = dogs.length - 1;;
-            }
-            photo[i].src = dogs[pg];
-            console.log("aux: "+pg+" i:"+i);
-         }
-         pg--;
-         if(pg < 0){
-            pg = dogs.length - 1;;
-         }
+      function beforeDog() {
+         pg = (pg - 1 + dogs.length) % dogs.length;
+         updateImages();
       }
-
    </script>
 </body>
 </html>
