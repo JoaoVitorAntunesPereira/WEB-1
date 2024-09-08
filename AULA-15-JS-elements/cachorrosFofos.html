@@ -5,13 +5,16 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Cachórros fófos</title>
    <style>
-      #buttons {
+      #buttons{
          display: flex;
          justify-content: space-between;
          width: 200px;
       }
 
-      #images {
+      #images{
+         display: flex;
+      }
+      .photo{
          display: flex;
       }
 
@@ -35,39 +38,57 @@
          "https://images.dog.ceo/breeds/pekinese/n02086079_6620.jpg",
          "https://images.dog.ceo/breeds/spaniel-cocker/n02102318_11573.jpg",
          "https://images.dog.ceo/breeds/airedale/n02096051_5241.jpg",
-         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg",
-         "https://images.dog.ceo/breeds/sharpei/noel.jpg"
+         "https://images.dog.ceo/breeds/poodle-miniature/n02113712_2552.jpg"
       ];
 
-      const imagesContainer = document.querySelector("#images");
+      let images = document.querySelector("#images");
 
-      // Criar elementos de imagem e adicionar ao container
-      dogs.forEach((dogSrc) => {
-         let imgElement = document.createElement('img');
-         imgElement.classList.add('photo');
-         imgElement.src = dogSrc;
-         imagesContainer.appendChild(imgElement);
-      });
+      for(let i = 0; i < dogs.length; i++){
+         let imagesDogs = document.createElement('img');
+         imagesDogs.classList.add('photo');
+         imagesDogs.src = dogs[i];
+         images.appendChild(imagesDogs);
+      }
 
-      let pg = 0;
-      const photos = document.getElementsByClassName("photo");
+      let pg = 0, aux = 0;
+      let photo = document.getElementsByClassName("photo");
+      photo.src = dogs[0];
 
-      function updateImages() {
-         for (let i = 0; i < dogs.length; i++) {
-            let index = (pg + i) % dogs.length;
-            photos[i].src = dogs[index];
+      let buttonsContainer = document.querySelector("#buttons");
+
+      function nextDog(){
+         aux = 0;
+         console.log("next ini: "+pg);
+         pg++;
+
+         if(pg == (dogs.length)){
+            pg = 0;
          }
+
+         for(let i = 0; i < dogs.length; i++){
+            let especificPhoto = photo[i];
+            aux = pg+i;
+
+            if(aux >= dogs.length){
+               aux = i-pg;
+            }
+
+            console.log("i:"+i+" aux:"+aux+" pg:"+pg);
+            especificPhoto.src = dogs[aux];
+         }
+         console.log("next fim: "+pg);
       }
 
-      function nextDog() {
-         pg = (pg + 1) % dogs.length;
-         updateImages();
+      function beforeDog(){
+         console.log("before ini: "+pg);
+         pg--;
+         if(pg < 0){
+            pg = dogs.length - 1;
+         }
+         photo.src = dogs[pg];
+         console.log("before fim: "+pg);
       }
 
-      function beforeDog() {
-         pg = (pg - 1 + dogs.length) % dogs.length;
-         updateImages();
-      }
    </script>
 </body>
 </html>
