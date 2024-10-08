@@ -28,7 +28,7 @@
 </head>
 
 <body>
-   <p>Valor:</p>
+   <p>Temperatura °C:</p>
    <input class="celsius">
    <button onclick="converter()">=</button>
    <div class="convertido"></div>
@@ -38,7 +38,7 @@
       let convertido = document.querySelector(".convertido");
          celsius.addEventListener("input",function converter(){
          let temp = (celsius.value * 9/5) + 32;
-            convertido.textContent = temp;
+            convertido.textContent = temp+"ºF";
       })
    </script>
 </body>

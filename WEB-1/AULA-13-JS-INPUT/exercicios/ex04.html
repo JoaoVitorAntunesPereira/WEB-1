@@ -31,7 +31,7 @@
    </style>
 </head>
 <body>
-   <p><span class="num num1">3</span> + <span class="num num2">4</span></p>
+   <p><span class="num num1">0</span> + <span class="num num2">0</span></p>
    <p>Resultado</p>
    <input id="result">
    <button onclick="verificar()">Verificar</button>
@@ -48,11 +48,19 @@
       let resposta = document.querySelector("#result");
       let acertou = document.querySelector(".acertou");
       let errou = document.querySelector(".errou");
+      let num1 = document.querySelector(".num1");
+      let num2 = document.querySelector(".num2");
+   
+      let n1 = Math.floor(Math.random() * 100);
+      let n2 = Math.floor(Math.random() * 100);
 
+      num1.textContent = n1;
+      num2.textContent = n2;
+   console.log(`asdsd${vavi}`)
       function verificar(){
          let result = Number(resposta.value);
          console.log(result)
-         if(result == 7){
+         if(result == n1 + n2){
             acertou.setAttribute("id","block");
             errou.removeAttribute("id","block")
          }else{
